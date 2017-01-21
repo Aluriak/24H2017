@@ -37,3 +37,7 @@ def close_all(seq:str) -> iter:
             stack.pop()
     # return the missing ones
     return ''.join(closeof(opener) for opener in reversed(stack))
+
+
+def run(payload:str) -> str:
+    return close_all(payload)
