@@ -28,6 +28,7 @@ def laumii_protection_against_times():
     ser = serial.Serial(PORT_NAME, baudrate=BAUD_RATE, bytesize=serial.EIGHTBITS,
                         write_timeout=10)
     print('Connection:', ser)
+    ser.write('\r\n')
 
     received = ''
     print('InWaiting:', ser.in_waiting)
