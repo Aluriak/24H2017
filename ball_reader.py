@@ -18,9 +18,10 @@ def gen_bytes(port_name=DEFAULT_PORT_NAME):
 
 def write_bytes(source, output_file=DEFAULT_OUTPUT_FILE):
 
-    source = iter(source)
     with open(output_file, 'wb') as output:
-        output.write(next(gen_bytes()))
+
+        [output.write(byte) for byte in source]
+
 
 
 if __name__ == '__main__':
