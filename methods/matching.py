@@ -27,8 +27,8 @@ def iscorrect(seq:str) -> bool:
 def close_all(seq:str) -> iter:
     stack = []
     openers = '([{<'
-    closers = ')]{>'
-    for c in seq:
+    closers = ')]}>'
+    for idx, c in enumerate(seq):
         if c in openers:
             stack.append(c)
         if c in closers:
@@ -36,7 +36,7 @@ def close_all(seq:str) -> iter:
                 raise ValueError("Unexpected unvalid input seq.")
             stack.pop()
     # return the missing ones
-    return ''.join(closeof(opener) for opener in reversed(stack))
+    return ''.join(closerof(opener) for opener in reversed(stack))
 
 
 def run(payload:str) -> str:
