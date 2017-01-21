@@ -21,7 +21,6 @@ def write_bytes(source, output_file):
         [output.write(byte) for byte in source]
 
 
-
 if __name__ == '__main__':
 
     write_bytes(gen_bytes(PORT_NAME), PORT_DUMP_FILE)

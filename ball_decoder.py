@@ -1,4 +1,6 @@
 from defaults import PORT_DUMP_FILE
+from itertools import islice
+from bitstring import BitArray
 
 
 def decode_ascii(line):
@@ -7,7 +9,7 @@ def decode_ascii(line):
 
         return line.decode('ascii')
 
-    except:
+    except UnicodeDecodeError:
 
         return None
 
@@ -16,9 +18,9 @@ def decode_unicode(line):
 
     try:
 
-        return line.decode('unicode')
+        return line.decode('utf8')
 
-    except:
+    except UnicodeDecodeError:
 
         return None
 
@@ -27,7 +29,7 @@ def decode_hex(line):
 
     try:
 
-        return line.decode('hexadecimal')
+        return line.hex()
 
     except:
 
@@ -38,24 +40,23 @@ def decode_binary(line):
 
     try:
 
-        return line.decode('binary')
+        return BitArray(line).bin
 
     except:
 
         return None
 
 
-def decode_file(filename, methods):
+def decode_file(filename, length, methods):
 
-    with open(filename) as in_file:
-
-        for method in methods:
-            print(method.name + ' :\n\n')
-            for line in in_file:
+    for method in methods:
+        with open(filename, 'rb') as in_file:
+            print(method.__name__ + ' :\n\n')
+            for line in islice(in_file, 0, length):
                 print(method(line))
             print('\n\n')
 
 
 methods = [decode_ascii, decode_unicode, decode_hex, decode_binary]
 
-decode_file(PORT_DUMP_FILE, methods)
+decode_file(PORT_DUMP_FILE, 10, methods)
