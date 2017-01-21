@@ -1,6 +1,6 @@
 
 
-from algos import reverse_text as rt
+from methods import reverse_text as rt
 
 
 def test_run():
