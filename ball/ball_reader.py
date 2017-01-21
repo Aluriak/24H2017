@@ -1,6 +1,6 @@
 import re
 import serial
-from defaults import PORT_DUMP_FILE, PORT_NAME, BAUD_RATE
+from defaults import PORT_DUMP_FILE, PORT_NAME, BAUD_RATE, REGEX_4TIMES8
 
 
 def gen_bytes(port_name):
@@ -24,31 +24,33 @@ def write_bytes(source, output_file):
 
 def laumii_protection_against_times():
 
-    REGEX_4TIMES8 = re.compile('([0-9]+)\s*times?\s*([0-9]+)\s*\?')
     ser = serial.Serial(PORT_NAME, baudrate=BAUD_RATE, bytesize=serial.EIGHTBITS,
-                        write_timeout=10)
+                        write_timeout=0.5)
     print('Connection:', ser)
     ser.write(b'\r\n')
 
     received = ''
+    sent = False
     print('InWaiting:', ser.in_waiting)
     while True:
-        received += ser.read(1).decode()
-        # print('LOOP')
+        new_char = ser.read(1).decode()
+        if new_char:  # have something to say
+            received += new_char
+            print(new_char, end='', flush=True)
 
-        if received[-1] in b'\n\r\f':
-            print(">>", received)
+            match = REGEX_4TIMES8.search(received)
+            if match and not sent:
+                sent = True
+                first, second = match.groups(0)
+                res = int(first) * int(second)
+                ser.write((str(res) + '\n').encode())
+                # print("\nfound {} × {} -> {}".format(first, second, res))
+        else:  # probably expect an input
+            print('<waiting for user input>')
+            userin = input()
+            ser.write((userin.strip() + '\r\n').encode())
 
-        match = REGEX_4TIMES8.match(received)
-        if match:
-            first, second = match.groups(0)
-            res = int(first) * int(second)
-            ser.write(str(res).encode())
-            print("found {} × {} -> {}".format(first, second, res))
 
-
-
-#    ser.write(b'\r\n')
 
 
 
