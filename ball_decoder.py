@@ -11,7 +11,7 @@ def decode_ascii(line):
 
     except UnicodeDecodeError:
 
-        return None
+        return "Error"
 
 
 def decode_unicode(line):
@@ -22,7 +22,7 @@ def decode_unicode(line):
 
     except UnicodeDecodeError:
 
-        return None
+        return "Error"
 
 
 def decode_hex(line):
@@ -33,7 +33,7 @@ def decode_hex(line):
 
     except:
 
-        return None
+        return "Error"
 
 
 def decode_binary(line):
@@ -44,7 +44,7 @@ def decode_binary(line):
 
     except:
 
-        return None
+        return "Error"
 
 
 def decode_file(filename, length, methods):
@@ -52,11 +52,11 @@ def decode_file(filename, length, methods):
     for method in methods:
         with open(filename, 'rb') as in_file:
             print(method.__name__ + ' :\n\n')
-            for line in islice(in_file, 0, length):
+            for i, line in enumerate(islice(in_file, 0, length)):
                 print(method(line))
             print('\n\n')
 
 
 methods = [decode_ascii, decode_unicode, decode_hex, decode_binary]
 
-decode_file(PORT_DUMP_FILE, 10, methods)
+decode_file(PORT_DUMP_FILE, 30, methods)
