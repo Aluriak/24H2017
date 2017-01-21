@@ -13,4 +13,6 @@ SPARQLWrapper==1.8.0
 SQLAlchemy==1.1.4
 gunicorn==19.6.0
 python-dateutil==2.5.3
+pyserial==3.2.1
+
 
