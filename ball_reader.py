@@ -21,6 +21,23 @@ def write_bytes(source, output_file):
         [output.write(byte) for byte in source]
 
 
+def vitellius_dial():
+
+    ser = serial.Serial(PORT_NAME, baudrate=230400, bytesize=serial.EIGHTBITS)
+
+    out = ''
+    while ser.inWaiting() > 0:
+        out += ser.read(1)
+
+        if out != '':
+            print (">>", out)
+
+
+
+#    ser.write(b'\r\n')
+
+
+
 if __name__ == '__main__':
 
     write_bytes(gen_bytes(PORT_NAME), PORT_DUMP_FILE)
