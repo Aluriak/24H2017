@@ -45,15 +45,17 @@ def decode_binary(line):
         return None
 
 
-def decode_file(filename):
+def decode_file(filename, methods):
 
     with open(filename) as in_file:
 
-        for line in in_file:
-            for method in methods:
+        for method in methods:
+            print(method.name + ' :\n\n')
+            for line in in_file:
                 print(method(line))
+            print('\n\n')
 
 
 methods = [decode_ascii, decode_unicode, decode_hex, decode_binary]
 
-decode_file(PORT_DUMP_FILE)
+decode_file(PORT_DUMP_FILE, methods)
