@@ -4,7 +4,7 @@ from defaults import PORT_DUMP_FILE, PORT_NAME
 
 def gen_bytes(port_name):
 
-    connection = serial.Serial(port_name)  # open serial port
+    connection = serial.Serial(port_name, baudrate=230400, bytesize=serial.EIGHTBITS)  # open serial port
     print(connection.name)         # check which port was really used
 
     while True:

@@ -1,2 +1,2 @@
-OUTPUT_FILE = 'dump.txt'
-PORT_NAME = '/dev/ttyUSB0'
+PORT_DUMP_FILE = 'dump.txt'
+PORT_NAME = '/dev/ttyUSB2'
