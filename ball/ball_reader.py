@@ -1,5 +1,5 @@
 import serial
-from defaults import PORT_DUMP_FILE, PORT_NAME
+from defaults import PORT_DUMP_FILE, PORT_NAME, BAUD_RATE
 
 
 def gen_bytes(port_name):
@@ -21,16 +21,25 @@ def write_bytes(source, output_file):
         [output.write(byte) for byte in source]
 
 
-def vitellius_dial():
+def laumii_protection_against_times():
 
-    ser = serial.Serial(PORT_NAME, baudrate=230400, bytesize=serial.EIGHTBITS)
+    REGEX_4TIMES8 = re.compile('([0-9]+)\s*times?\s*([0-9]+)\s*\??')
+    ser = serial.Serial(PORT_NAME, baudrate=BAUD_RATE, bytesize=serial.EIGHTBITS,
+                        write_timeout=10)
 
-    out = ''
+    received = ''
     while ser.inWaiting() > 0:
-        out += ser.read(1)
+        received += ser.read(1)
 
-        if out != '':
-            print (">>", out)
+        if received:
+            print(">>", received)
+
+        match = REGEX_4TIMES8.match(received)
+        if match:
+            first, second = match.groups(0)
+            res = int(first) * int(second)
+            ser.write(str(res))
+            print("found {} × {} -> {}".format(first, second, res))
 
 
 
