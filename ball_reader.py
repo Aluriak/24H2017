@@ -1,10 +1,8 @@
 import serial
-
-DEFAULT_OUTPUT_FILE = 'dump.txt'
-DEFAULT_PORT_NAME = '/dev/ttyUSB0'
+from defaults import PORT_DUMP_FILE, PORT_NAME
 
 
-def gen_bytes(port_name=DEFAULT_PORT_NAME):
+def gen_bytes(port_name):
 
     connection = serial.Serial(port_name)  # open serial port
     print(connection.name)         # check which port was really used
@@ -16,7 +14,7 @@ def gen_bytes(port_name=DEFAULT_PORT_NAME):
     connection.close()             # close port
 
 
-def write_bytes(source, output_file=DEFAULT_OUTPUT_FILE):
+def write_bytes(source, output_file):
 
     with open(output_file, 'wb') as output:
 
@@ -26,4 +24,4 @@ def write_bytes(source, output_file=DEFAULT_OUTPUT_FILE):
 
 if __name__ == '__main__':
 
-    write_bytes(gen_bytes(DEFAULT_PORT_NAME), DEFAULT_OUTPUT_FILE)
+    write_bytes(gen_bytes(PORT_NAME), PORT_DUMP_FILE)
