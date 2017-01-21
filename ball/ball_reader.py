@@ -26,10 +26,13 @@ def laumii_protection_against_times():
     REGEX_4TIMES8 = re.compile('([0-9]+)\s*times?\s*([0-9]+)\s*\??')
     ser = serial.Serial(PORT_NAME, baudrate=BAUD_RATE, bytesize=serial.EIGHTBITS,
                         write_timeout=10)
+    print('Connection:', ser)
 
     received = ''
+    print('InWaiting:', ser.inWaiting())
     while ser.inWaiting() > 0:
         received += ser.read(1)
+        print('LOOP')
 
         if received:
             print(">>", received)
