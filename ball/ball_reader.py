@@ -1,3 +1,4 @@
+import re
 import serial
 from defaults import PORT_DUMP_FILE, PORT_NAME, BAUD_RATE
 

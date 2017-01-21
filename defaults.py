@@ -1,3 +1,3 @@
 PORT_DUMP_FILE = 'dump01.txt'
-PORT_NAME = '/dev/ttyUSB2'
+PORT_NAME = '/dev/ttyUSB0'
 BAUD_RATE = 230400
