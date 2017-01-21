@@ -3,7 +3,7 @@
 
 
 def run(payload):
-    animals = tuple(payload.splitlines())
+    animals = tuple(payload.split().splitlines())
 
     rev_animals = tuple(''.join(reversed(name)) for name in animals)
     sorted_rev = sorted(rev_animals)
