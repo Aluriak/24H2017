@@ -1,22 +1,21 @@
 """
 
 usage:
-
     main.py <method> <data>
 
-Where <method> should be a method named after the modules find in algos/
+Where <method> should be a method named after the modules find in methods/
 And <data> should be a file in data/ directory containing the data
 to feed the to method with.
 
 """
 
-import docopt
 import glob
-import algos
+import docopt
+
+import methods
+
 
 DATA_DIR = 'data/'
-
-
 
 
 if __name__ == '__main__':
@@ -24,24 +23,25 @@ if __name__ == '__main__':
     assert '<method>' in args
     assert '<data>' in args
 
-    expected_algos = frozenset(
-        attr_name: getattr(attr_name)
-        for attr_name in dir(algos)
+    expected_methods = {
+        attr_name: getattr(methods, attr_name)
+        for attr_name in dir(methods)
         if not attr_name.startswith('__')
-    )
+    }
     expected_files = frozenset(glob.glob(DATA_DIR + '*'))
+    user_fn = DATA_DIR + args['<data>']
 
-    if args['<method>'] not in expected_algos:
-        raise ValueError("It seems that algos subpackage doesn't contains"
+    if args['<method>'] not in expected_methods:
+        raise ValueError("It seems that methods subpackage doesn't contains"
                          "the {} submodule. Known internal modules are: {}"
-                         "".format(args['<method>'], set(expected_algos.keys())))
-    if args['<data>'] not in expected_files:
+                         "".format(args['<method>'], set(expected_methods.keys())))
+    if user_fn not in expected_files:
         raise ValueError("It seems that data file {} does not exists. "
                          "Found data files are: {}"
-                         "".format(args['<data>'], set(expected_files)))
+                         "".format(user_fn, set(expected_files)))
 
     # open the file, use the method to feed it,
     # print the result
-    with open(args['<data>']) as fd:
-        result = expected_algos[args['<method>']].run(fd.read())
+    with open(user_fn) as fd:
+        result = expected_methods[args['<method>']].run(fd.read())
         print(result)
