@@ -1,6 +1,6 @@
 
 
-from algos import reverse_animals as ra
+from methods import reverse_animals as ra
 
 def test_run():
     in_ = "cheval\nkoala"

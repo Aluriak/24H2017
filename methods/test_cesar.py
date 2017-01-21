@@ -1,7 +1,7 @@
 
 
 import pytest
-from algos import cesar
+from methods import cesar
 
 
 def test_rot13():

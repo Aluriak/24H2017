@@ -1,5 +1,5 @@
 
-from algos import suite_croissante as sc
+from methods import suite_croissante as sc
 
 
 def test_first_decroissant():
