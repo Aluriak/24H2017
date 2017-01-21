@@ -24,7 +24,7 @@ def write_bytes(source, output_file):
 
 def laumii_protection_against_times():
 
-    REGEX_4TIMES8 = re.compile('([0-9]+)\s*times?\s*([0-9]+)\s*\??')
+    REGEX_4TIMES8 = re.compile('([0-9]+)\s*times?\s*([0-9]+)\s*\?')
     ser = serial.Serial(PORT_NAME, baudrate=BAUD_RATE, bytesize=serial.EIGHTBITS,
                         write_timeout=10)
     print('Connection:', ser)
@@ -36,7 +36,7 @@ def laumii_protection_against_times():
         received += ser.read(1).decode()
         # print('LOOP')
 
-        if received:
+        if received[-1] in b'\n\r\f':
             print(">>", received)
 
         match = REGEX_4TIMES8.match(received)
