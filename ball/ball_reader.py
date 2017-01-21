@@ -32,7 +32,7 @@ def laumii_protection_against_times():
 
     received = ''
     print('InWaiting:', ser.in_waiting)
-    while ser.in_waiting > 0:
+    while True:
         received += ser.read(1)
         print('LOOP')
 
