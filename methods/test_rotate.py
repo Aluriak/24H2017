@@ -81,3 +81,49 @@ QmWXwowRtSZsKxJyMzUl
 
 
     assert rot.run(in_).strip() == expected.strip()
+
+
+
+def test_basics_2():
+    in_ = """XrdaYlDYHJCOWrfIvfnz
+yGEFrhirZqhESTrzeYQx
+nTqxAvvYIQRivAtDMwmV
+rVdLDlMNkAoMUsbLMYOv
+mkYyclhPESHZDxSkLzUC
+MFXuFoEcIAIXrZwfQgiD
+MhvoeDytdldUVeAmWmeB
+vrWJNosHCcUFBkkYfpwk
+baFUYoTPFLmLNSBQgQcH
+tDLDvRMcGVcxnhfKQkHo
+tEfoykMcYwpKdDWQVffd
+BmpSxGfuRfklPtBebnMt
+OUqCBzHeZTSgoCdHQufX
+mMcMGedVTjpeQwxJQWKn
+iMSuoQPsuqjXtCiYoASK
+lZHMLbZBaPZcvURgiOQm
+qrcKnyDYSrXHzCQETnRp
+BiUkXLPILdLVhdMwxkkO
+xjYUutjkglJkCtaHGOfm
+YqziGsJgYMjawNkuKVig"""
+    expected = """YxBqlimOBttbvMMmrnyX
+qjirZMMUmEDarhFkVTGr
+zYUcHScqpfLFWvXYdqEd
+iUkKMuMCSoDUJouyLxFa
+GuXnLoGBxyvYNeFcDArY
+stLybQezGkRooDollvhl
+JjPDZPdHfMMTsyEhMviD
+gkIYBsVeuccPHtcPNYrY
+YgLSauTZRYGFCdIEkIZH
+MldrPqjTfwVLclASAQqJ
+jJLXZjpSkpcmUdIHoRhC
+akVHcXeglKxLFUXZMiEO
+wChzvtQoPdnNBVrDUvSW
+NtdCUCwCtDhSkeZxsATr
+kaMQRixdBWfBkAwSbtrf
+uHwEgYJHeQKQYmfkLDzI
+KGxTioQQbVQgfWQLMMev
+VOknOAWunfkQpmgzYwYf
+ifkRQSKfMfHcweiUOmQn
+gmOpmKnXtdoHkBDCvVxz
+"""
+    assert rot.run(in_).strip() == expected.strip()
