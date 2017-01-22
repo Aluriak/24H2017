@@ -2,6 +2,7 @@
 import re
 
 
+
 def quoted_hex(data):
     regex = re.compile(r'"([^"]+)"')
     matches = []
@@ -9,5 +10,4 @@ def quoted_hex(data):
         print(match)
         matches.append(match)
     return ''.join(m.encode().hex() for m in matches).upper()
-
 
