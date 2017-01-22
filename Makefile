@@ -1,6 +1,10 @@
 
 
+l: listen
+listen:
+	python main.py listen
 
+i: init_lumio
 init_lumio:
 	socat /dev/ttyUSB0,b230400,raw -
 
